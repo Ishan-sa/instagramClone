@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import faker from "faker";
 import Story from "./Story";
-import { randEmail, randFullName } from '@ngneat/falso';
 
 function Stories() {
     const [suggestions, setSuggestions] = useState([]);
