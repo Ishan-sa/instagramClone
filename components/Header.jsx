@@ -8,8 +8,12 @@ import {
     MenuIcon,
 } from "@heroicons/react/outline";
 import { HomeIcon } from "@heroicons/react/solid";
+import { useSession } from 'next-auth/react';
 
 function Header() {
+    const { data: session } = useSession();
+    console.log(session);
+
     return (
         <div className='shadow-sm border-b bg-white sticky top-0 z-999'>
             <div className='flex justify-between max-w-6xl mx-5 xl:mx-auto'>
