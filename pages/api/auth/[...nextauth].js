@@ -16,8 +16,8 @@ export default NextAuth({
         //     clientSecret: process.env.FACEBOOK_SECRET
         // }),
         GoogleProvider({
-            clientId: process.env.GOOGLE_ID,
-            clientSecret: process.env.GOOGLE_SECRET,
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
         // Passwordless / email sign in
         // EmailProvider({
@@ -32,4 +32,15 @@ export default NextAuth({
         verifyRequest: '/auth/verify-request', // (used for check email message)
         newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
     },
+    callbacks: {
+        async session({ session, user, token }) {
+            session.user.username = session.user.name
+                .split(" ")
+                .join("")
+                .toLocaleLowerCase();
+
+            session.user.uid = token.sub;
+            return session;
+        }
+    }
 });
